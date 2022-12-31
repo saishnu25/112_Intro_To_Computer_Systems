@@ -1,0 +1,155 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/09/21 22:55:32
+practice.asm						     Page 1 - 1
+
+
+				;
+				;	Author: Saishnu Ramesh Kumar
+				;	Date: 11/11/2021
+				;
+
+				.586
+				.MODEL FLAT
+				.STACK  4096            ; reserve 4096-byte stack
+ 00000000			.DATA                   ; reserve storage for data
+
+ 00000000			.CODE          ; start of main program code
+
+ 00000000  00000003		DWORD primeArray 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
+	   00000005
+	   00000007
+	   0000000B
+	   0000000D
+	   00000011
+	   00000013
+	   00000017
+	   0000001D
+	   0000001F
+	   00000025
+	   00000029
+	   0000002B
+	   0000002F
+	   00000035
+	   0000003B
+	   0000003D
+	   00000043
+	   00000047
+	   00000049
+	   0000004F
+	   00000053
+	   00000059
+	   00000061
+practice.asm(13) : error A2206:missing operator in expression
+				DWORD prime[]
+practice.asm(14) : error A2006:undefined symbol : prime
+
+ 00000060			main    PROC
+
+				mov eax, prime[1]
+practice.asm(18) : error A2006:undefined symbol : prime
+ 00000060  B8 00000002		mov eax, 2 ; first prime number
+				mov eax, prime[2]
+practice.asm(20) : error A2006:undefined symbol : prime
+ 00000065  B8 00000003		mov eax, 3 ; second prime number
+					
+				mov eax, candidate
+practice.asm(23) : error A2006:undefined symbol : candidate
+ 0000006A  B8 00000005		mov eax, 5 ; first candidate for new prime
+
+ 0000006F  EB 29		jmp primeCount
+				jmp loop
+practice.asm(27) : error A2008:syntax error : loop
+
+				;primeCount Proc
+ 0000009A			primeCount:
+
+ 0000009A  B8 0000009A R		mov eax, primeCount
+					primeCount, 2
+practice.asm(33) : error A2008:syntax error : primeCount
+
+ 0000009F			endprimeCount:
+
+				;loop Proc
+				loop:
+practice.asm(38) : error A2081:missing operand after unary operator
+					
+					;loop2 Proc
+ 000000A2				loop2:
+
+						jle primeCount, 100
+practice.asm(43) : error A2008:syntax error : ,
+						mov eax, index
+practice.asm(44) : error A2006:undefined symbol : index
+						index, 1
+practice.asm(45) : error A2008:syntax error : index
+						and prime, index
+practice.asm(46) : error A2006:undefined symbol : prime
+						idiv, index, candidate
+practice.asm(47) : error A2008:syntax error : ,
+						inc index
+practice.asm(48) : error A2006:undefined symbol : index
+
+ 000000C7				ENDloop2:
+					
+					if index jg primeCount
+practice.asm(52) : error A2008:syntax error : jg
+					mov ebx, prime, 0
+practice.asm(53) : error A2008:syntax error : ,
+					inc primeCount
+practice.asm(54) : error A2001:immediate operand not allowed
+					prime[primeCount], candidate
+practice.asm(55) : error A2008:syntax error : prime
+					end if
+practice.asm(56) : error A2008:syntax error : if
+
+					add candidate, 2
+practice.asm(58) : error A2006:undefined symbol : candidate
+
+ 000000D6			ENDloop:
+
+ 000000D6  C3			ret
+ 000000D7			main    ENDP
+				END                             ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/09/21 22:55:32
+practice.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000000D7 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000068 _TEXT	Length= 0000006F Public
+  primeCount . . . . . . . . . .	L Near	 0000009A _TEXT	
+  endprimeCount  . . . . . . . .	L Near	 0000009F _TEXT	
+  loop2  . . . . . . . . . . . .	L Near	 000000A2 _TEXT	
+  ENDloop2 . . . . . . . . . . .	L Near	 000000C7 _TEXT	
+  ENDloop  . . . . . . . . . . .	L Near	 000000D6 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   0 Warnings
+	   20 Errors

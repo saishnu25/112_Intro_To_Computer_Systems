@@ -1,0 +1,11 @@
+﻿  Assembling primeNumber.asm...
+primeNumber.asm(29): error A2008: syntax error : loop
+primeNumber.asm(35): error A2008: syntax error : primeCount
+primeNumber.asm(36): error A2008: syntax error : loop
+primeNumber.asm(46): error A2008: syntax error : ,
+primeNumber.asm(48): error A2008: syntax error : index
+primeNumber.asm(50): error A2008: syntax error : ,
+primeNumber.asm(55): error A2006: undefined symbol : index
+primeNumber.asm(68): error A2088: END directive required at end of file
+primeNumber.asm(68): fatal error A1010: unmatched block nesting : if-else
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: The command "ml.exe /c /nologo /Zi /Fo"Debug\primeNumber.obj" /W3 /errorReport:prompt /Fl /TaprimeNumber.asm" exited with code 1.

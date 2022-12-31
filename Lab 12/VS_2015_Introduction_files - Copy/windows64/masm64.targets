@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema
+      Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName
+      Include="assemble">
+      <Targets>_assemble</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+  <UsingTask
+    TaskName="assemble"
+    TaskFactory="XamlTaskFactory"
+    AssemblyName="Microsoft.Build.Tasks.v4.0">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <Target
+    Name="_assemble"
+    BeforeTargets="$(assembleBeforeTargets)"
+    AfterTargets="$(assembleAfterTargets)"
+    Condition="'@(assemble)' != ''"
+    DependsOnTargets="$(assembleDependsOn);ComputeassembleOutput"
+    Outputs="%(assemble.Outputs)"
+    Inputs="%(assemble.Identity);%(assemble.AdditionalDependencies);$(MSBuildProjectFile)">
+    <ItemGroup
+      Condition="'@(SelectedFiles)' != ''">
+      <assemble
+        Remove="@(assemble)"
+        Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <assemble_tlog
+        Include="%(assemble.Outputs)"
+        Condition="'%(assemble.Outputs)' != '' and '%(assemble.ExcludedFromBuild)' != 'true'">
+        <Source>@(assemble, '|')</Source>
+      </assemble_tlog>
+    </ItemGroup>
+    <Message
+      Importance="High"
+      Text="%(assemble.ExecutionDescription)" />
+    <WriteLinesToFile
+      Condition="'@(assemble_tlog)' != '' and '%(assemble_tlog.ExcludedFromBuild)' != 'true'"
+      File="$(IntDir)$(ProjectName).write.1.tlog"
+      Lines="^%(assemble_tlog.Source);@(assemble_tlog-&gt;'%(Fullpath)')" />
+    <assemble
+      Condition="'@(assemble)' != '' and '%(assemble.ExcludedFromBuild)' != 'true'"
+      CommandLineTemplate="%(assemble.CommandLineTemplate)"
+      AdditionalOptions="%(assemble.AdditionalOptions)"
+      Inputs="%(assemble.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+            $(ComputeLinkInputsTargets);
+            ComputeassembleOutput;
+          </ComputeLinkInputsTargets>
+    <ComputeLibInputsTargets>
+            $(ComputeLibInputsTargets);
+            ComputeassembleOutput;
+          </ComputeLibInputsTargets>
+  </PropertyGroup>
+  <Target
+    Name="ComputeassembleOutput"
+    Condition="'@(assemble)' != ''">
+    <ItemGroup>
+      <assembleDirsToMake
+        Condition="'@(assemble)' != '' and '%(assemble.ExcludedFromBuild)' != 'true'"
+        Include="%(assemble.Outputs)" />
+      <Link
+        Include="%(assembleDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <Lib
+        Include="%(assembleDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+      <ImpLib
+        Include="%(assembleDirsToMake.Identity)"
+        Condition="'%(Extension)'=='.obj' or '%(Extension)'=='.res' or '%(Extension)'=='.rsc' or '%(Extension)'=='.lib'" />
+    </ItemGroup>
+    <MakeDir
+      Directories="@(assembleDirsToMake-&gt;'%(RootDir)%(Directory)')" />
+  </Target>
+</Project>
