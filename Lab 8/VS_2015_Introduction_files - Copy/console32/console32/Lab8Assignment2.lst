@@ -1,0 +1,86 @@
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/21/21 14:41:51
+Lab8Assignment2.asm					     Page 1 - 1
+
+
+				.586
+				.MODEL FLAT
+				.STACK  4096            ; reserve 4096-byte stack
+ 00000000			.DATA                   ; reserve storage for data
+ 00000000 FFFFFF38		cmpvalue DWORD 0FFFFFF38H
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC
+ 00000000			     codebegin:
+ 00000000  B8 0000004F		        mov eax, 00000004Fh
+
+				        ; cmp eax, cmpvalue
+				        ; jl jmpaddress
+				        
+				        ;cmp eax, cmpvalue
+				        ;jb jmpaddress
+				        
+				       ; cmp eax, 04fh
+				       ; je jmpaddress
+				        
+				       ; cmp eax,79
+				        ;jne jmpaddress
+				        
+				        ;cmp cmpvalue,0
+				        ;jbe jmpaddress
+				        
+				       ;cmp cmpvalue,-200
+				       ;jge jmpaddress
+				        
+				        ;add eax,200
+				        ;js jmpaddress
+				        
+ 00000005  81 05 00000000 R	        add cmpvalue, 200
+	   000000C8
+ 0000000F  74 00		        jz jmpaddress
+ 00000011			    jmpaddress:
+ 00000011  B8 00000000		        mov eax,0
+ 00000016  C3			        ret
+ 00000017			main    ENDP
+
+				END          ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/21/21 14:41:51
+Lab8Assignment2.asm					     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000004 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000017 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000017 Public
+  codebegin  . . . . . . . . . .	L Near	 00000000 _TEXT	
+  jmpaddress . . . . . . . . . .	L Near	 00000011 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+cmpvalue . . . . . . . . . . . .	DWord	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors

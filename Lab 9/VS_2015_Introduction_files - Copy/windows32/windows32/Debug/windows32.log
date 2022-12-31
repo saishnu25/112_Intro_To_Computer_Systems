@@ -1,0 +1,4 @@
+﻿  Assembling example.asm...
+example.asm(34): error A2006: undefined symbol : myFactorialProc
+example.asm(35): error A2006: undefined symbol : myFactorialProcRec
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\masm.targets(70,5): error MSB3721: The command "ml.exe /c /nologo /Zi /Fo"Debug\example.obj" /W3 /errorReport:prompt /Fl /Taexample.asm" exited with code 1.

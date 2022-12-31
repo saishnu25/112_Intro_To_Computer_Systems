@@ -1,0 +1,155 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    10/31/21 00:20:47
+example.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- Getting the factorial of a inputted number
+				; Author:  Saishnu Ramesh Kumar
+				; Date:    10/28/2021
+
+				.586
+				.MODEL FLAT
+
+				INCLUDE io.h            ; header file for input/output
+			      C ; IO.H -- header file for I/O macros (listing suppressed)
+			      C .NOLIST      ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+
+				.STACK 4096
+
+ 00000000			.DATA
+
+ 00000000 00000000		num DWORD ?
+
+ 00000004 45 6E 74 65 72	prompt1 BYTE "Enter first number", 0
+	   20 66 69 72 73
+	   74 20 6E 75 6D
+	   62 65 72 00
+
+ 00000017  00000028 [		string BYTE 40 DUP(?)
+	    00
+	   ]
+ 0000003F 54 68 65 20 66	resultLb1 BYTE "The factorial is", 0
+	   61 63 74 6F 72
+	   69 61 6C 20 69
+	   73 00
+
+ 00000050 00			result BYTE 11 DUP(?),0 ;string to factorial
+
+ 00000000			.CODE
+
+				; main proc
+ 00000000			_MainProc PROC
+
+				        input   prompt1, string, 40      ; read ASCII characters
+				        atod    string          ; convert to integer
+ 0000002D  A3 00000000 R	        mov     num, eax    ; store in memory
+				        
+ 00000032  FF 35 00000000 R	        push num
+
+				        call myFactorialProc
+example.asm(34) : error A2006:undefined symbol : myFactorialProc
+				        call myFactorialProcRec
+example.asm(35) : error A2006:undefined symbol : myFactorialProcRec
+
+
+				        dtoa result, eax    ; convert to ASCII characters
+				        output resultLb1, result ; output label and sum
+
+ 00000069  B8 00000000		        mov     eax, 0  ; exit with return code 0
+ 0000006E  C3			        ret
+
+ 0000006F			_MainProc ENDP
+				END  ; end of source code
+
+
+				; code for non recursive factorial
+				myFactorialProc PROC
+
+				    mov eax, num
+
+				    loop eax, DWORD PTR [ebp - 4]
+				    dec eax 
+
+				    mov result, eax
+
+				myFactorialProc ENDP
+
+				; code for recursive factorial
+				myFactorialProcRec PROC
+
+				    cmp DWORD PTR [ebp - 4], eax
+				    mov eax, 1
+
+				    mov eax, DWORD PTR[ebp - 4]
+				    sub eax, 1
+				    mov, edi, eax
+				    loop myFactorialProcRec
+				    imul eax, DWORD PTR[ebp - 4]
+				    dec eax
+
+				    mov result, eax
+
+				myFactorialProcRec ENDP
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    10/31/21 00:20:47
+example.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atow . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+wtoa . . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000005C Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000085 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_MainProc  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000085 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_getInput  . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_showOutput  . . . . . . . . . .	L Near	 00000000 FLAT	External
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atowproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+num  . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+prompt1  . . . . . . . . . . . .	Byte	 00000004 _DATA	
+resultLb1  . . . . . . . . . . .	Byte	 0000003F _DATA	
+result . . . . . . . . . . . . .	Byte	 00000050 _DATA	
+string . . . . . . . . . . . . .	Byte	 00000017 _DATA	
+wtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   2 Errors

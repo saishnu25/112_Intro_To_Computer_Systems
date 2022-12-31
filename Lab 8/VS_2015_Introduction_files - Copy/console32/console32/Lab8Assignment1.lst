@@ -1,0 +1,85 @@
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/21/21 10:48:14
+Lab8Assignment1.asm					     Page 1 - 1
+
+
+				.586
+				.MODEL FLAT
+				.STACK  4096            ; reserve 4096-byte stack
+ 00000000			.DATA                   ; reserve storage for data
+ 00000000 00			num BYTE ?
+ 00000001 00000000		saveaddress DWORD ?
+ 00000005 00000000		sum DWORD ?
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC        
+ 00000000			  codebegin:
+ 00000000  C6 05 00000000 R	        mov num,254
+	   FE
+ 00000007  C7 05 00000005 R	        mov sum,0
+	   00000000
+ 00000011			  codeLoop1:
+ 00000011  80 05 00000000 R	        add num,1
+	   01
+ 00000018  A1 00000005 R	        mov eax,sum
+ 0000001D  02 05 00000000 R	        add al,num
+ 00000023  A3 00000005 R	        mov sum,eax
+ 00000028  EB E7		        jmp codeLoop1
+ 0000002A  C7 05 00000005 R	        mov sum,0
+	   00000000
+ 00000034  FF 25 00000001 R	        jmp saveaddress 
+ 0000003A  A1 00000005 R	        mov eax,sum
+ 0000003F  FF E0		        jmp eax
+ 00000041  C7 05 00000005 R	        mov sum,0
+	   00000000
+ 0000004B  FF 23		        jmp DWORD PTR[ebx]
+ 0000004D  B8 00000000		        mov eax,0
+
+
+ 00000052  C3			        ret
+
+ 00000053			main    ENDP
+
+				END          ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/21/21 10:48:14
+Lab8Assignment1.asm					     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000009 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000053 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000053 Public
+  codebegin  . . . . . . . . . .	L Near	 00000000 _TEXT	
+  codeLoop1  . . . . . . . . . .	L Near	 00000011 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+num  . . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+saveaddress  . . . . . . . . . .	DWord	 00000001 _DATA	
+sum  . . . . . . . . . . . . . .	DWord	 00000005 _DATA	
+
+	   0 Warnings
+	   0 Errors
