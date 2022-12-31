@@ -1,0 +1,12 @@
+Visual Studio 2015 for assembly framework packages
+
+These framework packages require Visual C++ tools to build.
+Visual C++ does not install automatically with "typical" install choices.
+
+With an original installation, choose "custom" and select C++.
+
+If VS 2015 is also installed, Control Panel/Programs and Features
+can be used to add the C++ language tools to the existing installation.
+
+Additional note: There are sometimes build warnings with the console32
+package. These can be ignored.

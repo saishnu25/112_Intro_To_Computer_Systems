@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup
+    Condition="'$(assembleBeforeTargets)' == '' and '$(assembleAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+    <assembleBeforeTargets>Midl</assembleBeforeTargets>
+    <assembleAfterTargets>CustomBuild</assembleAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <assembleDependsOn
+      Condition="'$(ConfigurationType)' != 'Makefile'">_SelectedFiles;$(assembleDependsOn)</assembleDependsOn>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <assemble>
+      <CommandLineTemplate>ml64 /c /Zi /Fl [inputs]</CommandLineTemplate>
+      <Outputs>%(Filename).obj</Outputs>
+    </assemble>
+  </ItemDefinitionGroup>
+</Project>

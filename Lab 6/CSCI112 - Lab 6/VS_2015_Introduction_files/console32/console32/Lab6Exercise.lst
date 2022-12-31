@@ -1,0 +1,88 @@
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/14/21 10:12:17
+Lab6Exercise.asm					     Page 1 - 1
+
+
+				; Example assembly language program -- adds 158 to number in memory
+				; Author:  Saishnu Ramesh Kumar
+				; Date:    10/07/2021
+				comment & we can comment in this 
+				way to &
+
+				.586
+				.MODEL FLAT
+
+				.STACK  4096            ; reserve 4096-byte stack
+
+ 00000000			.DATA                   ; reserve storage for data
+
+				;wordOp WORD 15
+
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC
+				        
+				        ;add dx, wordOp ;sub bl, dh ;inc ecx ;dec cl ;neg ebx
+
+				        ;mov ebx, 000610132H
+				        ;mov ecx, 0FF250F75H
+
+				       ;sub ebx, ecx
+
+				       ;mov cx, 00D31H
+
+				       ;inc cx
+
+				       ;mov eax, 000000001H
+
+				       ;dec eax
+
+				       ;mov ebx, 0FFFFFFFFH
+
+				       ;neg ebx
+
+
+
+
+
+ 00000000  C3			        ret
+ 00000001			main    ENDP
+
+				END                             ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/14/21 10:12:17
+Lab6Exercise.asm					     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000001 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000001 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   0 Warnings
+	   0 Errors
