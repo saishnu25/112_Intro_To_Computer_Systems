@@ -1,0 +1,50 @@
+; Example assembly language program -- adds two numbers
+; Author:  sai hemanth thota
+; Date:    1/2008
+
+.586
+.MODEL FLAT
+
+INCLUDE io.h            ; header file for input/output
+
+.STACK 4096
+
+.DATA
+
+sample real4  175.5
+
+;sample80 real10 -1.25
+
+fpvalue real4 0.5
+
+intvalue dword 6
+
+fp1 real4 35.0
+fp2 real4 24.0
+fp3 real4 23.0
+fp4 real4 12.0
+fp5 real4 9.0
+
+.CODE
+_MainProc PROC
+       
+      fld fp1
+       fld fp2
+      fld fp3
+      fld fp4
+      fld fp5
+
+  
+
+        mov eax,0
+       
+        ret
+_MainProc ENDP
+END                             ; end of source code
+
+
+
+
+
+
+
