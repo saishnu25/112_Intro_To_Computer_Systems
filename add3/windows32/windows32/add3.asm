@@ -1,0 +1,35 @@
+; Example assembly language program -- adds two numbers
+; Author:  Saishnu Ramesh Kumar
+; Date:    11/4/2021
+
+.586
+.MODEL FLAT
+
+INCLUDE io.h            ; header file for input/output
+
+.STACK 4096
+
+.DATA
+
+.CODE
+
+sampleAdd MACRO num1, num2, num3
+
+    mov eax, num1
+    add eax, num2
+    add eax, num3
+
+    ENDM
+
+
+_MainProc PROC
+        
+        sampleAdd 012h,055h, 0100h
+
+        sampleAdd eax, ebx, ecx
+
+        mov eax, 0
+        ret
+_MainProc ENDP
+END                             ; end of source code
+
