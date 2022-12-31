@@ -1,0 +1,113 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/04/21 16:10:08
+toUpper.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- adds two numbers
+				; Author:  Saishnu Ramesh Kumar
+				; Date:    11/4/2021
+
+				.586
+				.MODEL FLAT
+
+				INCLUDE io.h            ; header file for input/output
+			      C ; IO.H -- header file for I/O macros (listing suppressed)
+			      C .NOLIST      ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+
+				.STACK 4096
+
+ 00000000			.DATA
+
+ 00000000 61			var BYTE "a"
+
+ 00000000			.CODE
+
+				toUpper MACRO var
+				    local upper
+
+				    mov al, var
+				    cmp al, 061h
+
+				    jl upper
+				    cmp al, 07ah
+
+				    jg upper
+				    sub al, 020h
+				    mov var, al
+
+				    upper:
+
+				ENDM
+
+
+ 00000000			_MainProc PROC
+				        
+				        toUpper var
+ 00000014  A0 00000000 R	        mov al, var
+
+ 00000019  B0 00		        mov al, 0
+ 0000001B  C3			        ret
+ 0000001C			_MainProc ENDP
+				END                             ; end of source code
+
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/04/21 16:10:08
+toUpper.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atow . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+toUpper  . . . . . . . . . . . .	Proc
+wtoa . . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000001 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001C Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_MainProc  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001C Public
+  ??0000 . . . . . . . . . . . .	L Near	 00000014 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_getInput  . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_showOutput  . . . . . . . . . .	L Near	 00000000 FLAT	External
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atowproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+var  . . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+wtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   0 Errors
