@@ -1,0 +1,113 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/04/21 14:54:50
+add3.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- adds two numbers
+				; Author:  Saishnu Ramesh Kumar
+				; Date:    11/4/2021
+
+				.586
+				.MODEL FLAT
+
+				INCLUDE io.h            ; header file for input/output
+			      C ; IO.H -- header file for I/O macros (listing suppressed)
+			      C .NOLIST      ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+
+				.STACK 4096
+
+ 00000000			.DATA
+
+ 00000000			.CODE
+
+				sampleMax MACRO num1, num2
+
+				    push eax
+				    mov eax, num1
+				    mov eax, num2
+
+				    cmp eax, eax
+				    cmovl eax, eax
+
+				    ENDM
+
+
+ 00000000			_MainProc PROC
+				        
+				        sampleMax 012h,055h
+			     1	    cmovl eax, eax
+add3.asm(30) : error A2085:instruction or register not accepted in current CPU mode
+ sampleMax(7): Macro Called From
+  add3.asm(30): Main Line Code
+
+				        sampleMax eax, ebx
+			     1	    cmovl eax, eax
+add3.asm(32) : error A2085:instruction or register not accepted in current CPU mode
+ sampleMax(7): Macro Called From
+  add3.asm(32): Main Line Code
+
+ 00000014  B8 00000000		        mov eax, 0
+ 00000019  BB 00000000		        mov ebx, 0 
+ 0000001E  C3			        ret
+ 0000001F			_MainProc ENDP
+				END                             ; end of source code
+
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/04/21 14:54:50
+add3.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atow . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+sampleMax  . . . . . . . . . . .	Proc
+wtoa . . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001F Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_MainProc  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001F Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_getInput  . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_showOutput  . . . . . . . . . .	L Near	 00000000 FLAT	External
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atowproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+wtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   2 Errors
